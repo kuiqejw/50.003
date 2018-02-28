@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ProblemSet3;
+package problemset;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -21,7 +21,7 @@ public class DiskTest {
     public DiskTest() {
     }
     @Test
-    public void TestLoop1(){//Threshold -(x+y) < 0, 5 < x < 1000
+    public void TestLoop1(){//Threshold -(x+y) < 0, 5 < x <= 1000
         Disk disk = new Disk(501,500);
         disk.manipulate();
         System.out.println("x: " + disk.x+"y: " + disk.y);
@@ -45,23 +45,30 @@ public class DiskTest {
         System.out.println("x: " + disk.x+"y: " + disk.y);
     }
     @Test
-    public void TestIf3(){//x < 5, 1<y < =12
-        Disk disk = new Disk(4,11);
-        disk.manipulate();
-        System.out.println("x: " + disk.x+"y: " + disk.y);
-    }
-    @Test
-    public void TestIf4(){//x < 5, y > 12
+    public void TestIf3(){//x < 5, y > 12
         Disk disk = new Disk(4,13);
         disk.manipulate();
         System.out.println("x: " + disk.x+"y: " + disk.y);
         
     }
     @Test
-    public void TestIf5(){//5< x <=1000, y = 0
+    public void TestIf4(){//5< x <=1000, y = 0 Cohort Exercise 12 
         Disk disk = new Disk(1000,0);
         disk.manipulate();
         System.out.println("x: " + disk.x+"y: " + disk.y);
         
+    }
+    @Test
+    public void TestFail()throws Exception{
+        Thread t = new Thread(new Runnable(){
+            public void run(){
+                Disk disk = new Disk(1001, -1000);
+                disk.manipulate();
+            }
+        });
+        t.start();
+        t.join(5000);
+        assertFalse(t.isAlive());
+        t.interrupt();
     }
 }
