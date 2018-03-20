@@ -17,12 +17,12 @@ public class OrderFoodWithBot {
     static String incorrectPassword = "blahblah";
 
     public static void main(String[] args) throws InterruptedException {
-        System.setProperty("webdriver.gecko.driver","/usr/local/bin/geckodriver");
-        WebDriver driver = new FirefoxDriver();
+        //System.setProperty("webdriver.gecko.driver","/usr/local/bin/geckodriver");
+        //WebDriver driver = new FirefoxDriver();
 
-        //System.setProperty("webdriver.chrome.driver", "/home/ongajong/Documents/Week 6/chromedriver");
-        //WebDriver driver = new ChromeDriver();
-        driver.get("https://auth.uber.com/login/?next_url=https%3A%2F%2Fwww.ubereats.com%2Flogin-redirect%2F%3Fredirect%3D%252Fsingapore%252F&state=y6HxAWjb4EknypQ-8vJ9wCTME6mlmgGiFqbjx2B32HY%3D");
+        System.setProperty("webdriver.chrome.driver", "/home/ongajong/Documents/Week 6/chromedriver");
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://deliveroo.com.sg/login");
 
         // get all the links
 //        java.util.List<WebElement> links = driver.findElements(By.tagName("a"));
@@ -33,18 +33,16 @@ public class OrderFoodWithBot {
 //        }
 
         // get the user name field of the account page
-        WebElement username = driver.findElement(By.name("useridInput"));
+        WebElement username = driver.findElement(By.name("login_email"));
 
         // send my user name to fill up the box
         username.sendKeys(myUserName);
-        //click on send Button
-        username.submit();
         // now locate the password field in the current page
-        WebElement password = driver.findElement(By.name("password"));
+        WebElement password = driver.findElement(By.name("login_password"));
 
         // send incorrect password 
         password.sendKeys(incorrectPassword);
-
+        username.submit();
         password.submit();
 
         // clear the password
@@ -53,6 +51,10 @@ public class OrderFoodWithBot {
         // send correct password 
         password.sendKeys(myPassword);
         password.submit();
-
+        Thread.sleep(10000);
+        WebElement postcode = driver.findElement(By.name("postcode"));
+        
+        postcode.sendKeys("670523");
+        postcode.submit();
     }
 }
