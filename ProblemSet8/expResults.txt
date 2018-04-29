@@ -1,0 +1,78 @@
+test1:
+	ThreadPerTaskWebServer.java
+	10 clients, spent time:167
+
+	100 clients, spent time:537
+
+	1000 clients, spent time:4233
+
+test2:
+	SingleThreadWebServer.java
+	10 clients, spent time:151
+
+	100 clients, spent time:569
+
+	1000 clients, spent time:4568
+
+Done with Wu Yufei
+The increase in the number of clients lead to a greater amount of time spent. However, it is difficult to determine the difference between the SingleThreadWebServer.java and ThreadPerTaskWebServer.java, as while the former spent a greater amount of time spent with 100 and 1000 clients as compared to the latter, it took less time when there were 10 clients involved
+
+	ExecutorWebServer.java
+	10 clients, spent time:60
+
+	100 clients, spent time:268
+
+	1000 clients, spent time:3289
+
+With 10 clients or so, there is no obvious difference between thread per task and thread pool. If below 100, then the thread pool here is the same as thread per task. Whenever a new task, then create a new task. I have to maintain the thread pool. If I have 1000 clients, then a clear difference between thread per task and thread implementation. By reusing threads, shorter time taken for fixed pool. 
+Exercise 3:
+
+Just changing the number of threads: 
+5 Nthreads:7703
+8 Nthreads: 7687
+10 Nthreads: 7500
+20 Nthreads: 7453
+30 Nthreads: 7437
+35 Nthreads: 7469
+40 Nthreads: 7735
+41 Nthreads: 7502
+50 Nthreads: 7797
+Minimimal appears to be at 30 Nthreads
+Exercise 5:
+3 N Threads: 20001
+4: 14719
+5: 12750
+8: 15359
+7: 12000
+6:14172
+
+Cohort Exercise 7.
+number of threads: 32
+Total Time(CAS): 42951974
+Total Time (lockcounter): 132054092
+
+number of threads: 42
+Total Time(CAS): 49895987
+Total Time (lockcounter): 173404517
+
+number of threads: 52
+Total Time(CAS): 34952440
+Total Time (lockcounter): 82876153
+
+number of threads: 62
+Total Time(CAS): 65089559
+Total Time (lockcounter): 98975394
+
+number of threads: 72
+Total Time(CAS): 58764652
+Total Time (lockcounter): 114953524
+
+number of threads: 82
+Total Time(CAS): 59586159
+Total Time (lockcounter): 124277075
+
+number of threads: 92
+Total Time(CAS): 69989864
+Total Time (lockcounter): 148399251
+
+CAS is faster in all cases, as it does not exclusively lock, but checks for an outdated value instead, only updating to its most recent if required.
